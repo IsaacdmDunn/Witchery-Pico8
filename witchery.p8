@@ -963,10 +963,10 @@ function switch_effect(id)
 	elseif id==3 then
 		if state==true then
 			state=false
-			mset(59,1,98)
+			mset(59,1,72)
 		else
 			state=true
-			mset(59,1,72)
+			mset(59,1,98)
 		end
 		elseif id==4 then
 			if state==true then
@@ -1278,7 +1278,12 @@ function draw_moth()
 end
 
 function move_moth(x,y)
-	if x<64*8 then
+	if x>80*8 or x<62*8 or
+								y>20*8 or y<-16 then
+		x=71*8
+		y=6*8
+		state=false
+	elseif x<64*8 then
 		direction=2
 	elseif x>78*8 then
 		direction=3
@@ -1286,16 +1291,13 @@ function move_moth(x,y)
 		direction=1
 	elseif y>14*8 then
 		direction=0
-	elseif x>80*8 or x<62*8 or
-								y>20*8 or y<-16 then
-		x=71*8
-		y=6*8
+	
 	end	
 	
 	if state==false then
-		if direction==0 then
+		if direction==1 then
 			y+=2
-		elseif direction==1 then
+		elseif direction==0 then
 			y-=2
 		elseif direction==2 then
 			x+=2
